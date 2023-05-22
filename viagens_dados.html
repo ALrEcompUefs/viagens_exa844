@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" http-equiv="Content-Type" content="charset=utf-8">
+	<title>Consulta de viagens</title>
+	<link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+	<link rel="stylesheet" type="text/css" href="estilo_dados.css">
+</head>
+
+<script type="application/javascript">
+	/*
+		Função que realiza a requisição a API e monta a Tabela com a resposta
+	*/
+	function get(event){
+		var url= "http://127.0.0.1:5000/";
+
+		// obtém os dados que vãos ser usados na consulta a API
+		var pontifice = document.getElementById("pontifices").value;
+		var ano = document.getElementById("ano").value;
+		var tipo_consulta = document.getElementById("tipo_consulta").value;
+		// variavel que indica o tipo de tabela a ser criada
+		var tipo_tabela;
+		// verifica qual tipo de requisição sera feita
+		if (tipo_consulta == "total"){
+			tipo_tabela =1;
+			// se for do tipo total então irá contablizar os número de viagens por papa
+			if(pontifice == 'none' && ano ==""){
+				tipo_tabela=1;
+				// busca o número total de viagens
+				url = url+"viagens/contagem";
+				// possui apenas o total de viagens
+		
+			}
+			else if (pontifice =="none" && ano !=""){
+				// busca o total de viagens nesse ano
+				url = url+"viagens/contagem?ano="+ano;
+				// possui apenas o total de viagens
+				
+			}
+			else if (pontifice !="none" && ano ==""){
+				// busca o total de viagens do pontitifice
+				url = url+"viagens/contagem?pontifice="+pontifice;
+				// possui total
+				
+			}
+			else{
+				// busca o total de viagens do pontifice no ano
+				url = url+"viagens/contagem?pontifice="+pontifice+"&ano="+ano;
+				// possui apenas o total de viagens
+				
+			}
+		}
+		// se for uma listagem
+		else{
+			if(pontifice == 'none' && ano ==""){
+				// Retorna a lista do total de viagens de todos pontifices
+				url = url+"pontifices/top?top=viagens";
+				// possui pontifice e total de viagens
+				tipo_tabela =2;
+			}
+			else if(pontifice !="none" && ano ==""){
+				url = url+"pontifices/top?top=viagens&pontifice="+pontifice;
+				// possui ano e total
+				tipo_tabela =3;
+			}
+			else{
+				// retorna a lista do total de viagens por ano 
+				url = url+"pontifices/top?top=ano";
+				// possui ano e total
+				tipo_tabela =3;
+			}
+		}
+
+		// cria requisição
+		var ajax = new XMLHttpRequest();
+		
+		// printa url no console
+		console.log(url);
+
+		// faz a requisição
+		ajax.open("GET",url,true);
+		ajax.onload = function(){
+			// se houve sucesso na requisição
+			if(ajax.status === 200){
+				// obtém json com a resposta
+				var jsonObj = JSON.parse(ajax.responseText);
+				// teste
+				//console.log("recebi");
+				console.log(jsonObj);
+				create_table(jsonObj,tipo_tabela);
+			}
+		}
+		ajax.send();
+	}
+
+	function create_table(jsonObj,tipo_tabela){
+		// tamanho do json recebido
+		var tamanho = jsonObj.length;
+		console.log(tamanho);
+		console.log("tipo:"+tipo_tabela);
+
+		// obtém div onde a tabela irá ficar e a cria tabela
+		var area_dados = document.getElementById("dados");
+		var tabela = document.createElement("table");
+
+		//insere class para tabela
+		tabela.className="tabela_dados";
+		// limpa a div
+		area_dados.innerHTML="";
+		// cria cabeçalho da tabela
+		cabecalho_tabela = document.createElement("thead");
+		// cria nova linha
+		var linha = document.createElement("tr");
+
+		if( tipo_tabela == 1){
+		// cria campos de indentificação dos elementos da tabela (total de viagens)
+			var colunaTotal = document.createElement("td");
+			colunaTotal.textContent="Total de Viagens";
+			linha.appendChild(colunaTotal);
+			tabela.appendChild(linha);
+			
+			// cria elementos 
+			const total= document.createTextNode(jsonObj['total_de_viagens']);
+			const cellTotal = document.createElement("td");
+			var linha1 =document.createElement("tr");
+			// insere o dado do total na tabela
+			cellTotal.appendChild(total);
+			linha1.appendChild(cellTotal);
+			tabela.appendChild(linha1);
+
+		}
+		else if(tipo_tabela ==2){
+			// cria campos de indentificação dos elementos da tabela (total de viagens e pontifice)
+			var colunaPontifice = document.createElement("td");
+			colunaPontifice.textContent="Pontífice";
+			var colunaTotal = document.createElement("td");
+			colunaTotal.textContent="Total de Viagens";
+			linha.appendChild(colunaTotal);
+			linha.appendChild(colunaPontifice);
+			tabela.appendChild(linha);
+		
+			
+			for(i=0;i<tamanho;i++){
+				// cria nova linha da tabela
+				var linha1 =document.createElement("tr");
+				// cria elementos da tabela
+				const total= document.createTextNode(jsonObj[i]['total_viagens']);
+				const cellTotal = document.createElement("td");
+				const pontifice= document.createTextNode(jsonObj[i]['pontifice']);
+				const cellPontifice = document.createElement("td");
+				// insere elementos na tabela
+				cellTotal.appendChild(total);
+				cellPontifice.appendChild(pontifice);
+				linha1.appendChild(cellTotal);
+				linha1.appendChild(cellPontifice);
+				tabela.appendChild(linha1);
+			}
+		}
+		else{
+			// cria campos de indentificação dos elementos da tabela (total de viagens e ano)
+			var colunaTotal = document.createElement("td");
+			colunaTotal.textContent="Total de Viagens";
+			var colunaAno =  document.createElement("td");
+			colunaAno.textContent="Ano";
+			linha.appendChild(colunaTotal);
+			linha.appendChild(colunaAno);
+			tabela.appendChild(linha);
+			// percorre json e insere dados
+			for(i=0;i<tamanho;i++){
+			// cria nova linha da tabela
+			var linha1 =document.createElement("tr");
+			// cria elementos da tabela
+			const total= document.createTextNode(jsonObj[i]['total_viagens']);
+			const cellTotal = document.createElement("td");
+			const ano= document.createTextNode(jsonObj[i]['Ano']);
+			const cellAno = document.createElement("td");
+			// insere elementos na tabela
+			cellTotal.appendChild(total);
+			cellAno.appendChild(ano);
+			linha1.appendChild(cellTotal);
+			linha1.appendChild(cellAno);
+			tabela.appendChild(linha1);
+			}
+		}
+		area_dados.appendChild(tabela);
+	} 
+</script>
+
+<body>
+	<header id="header">
+
+		<div id="area-info">
+			<h1 class="titulo_page">VIAGENS PAPAIS</h1>
+			<p class="texto_info">API para consulta de viagens pontíficias, obtenha dados estatísticos das viagens </p>
+		</div>
+		
+		<div id="area-menu">
+				<a href="index.html"><span class="texto_navbar">HOME</span></a>
+				<a href="viagens_categorias.html"><span class="texto_navbar">Categorias</span></a>
+				<a href="viagens_dados.html"><span class="texto_navbar">Dados</span></a>
+				<a href="viagens_destinos.html"><span class="texto_navbar">Destinos</span></a>
+				<a href="viagens_pontifices.html"><span class="texto_navbar">Pontifices</span></a>
+		</div>
+	</header>
+
+	</div>
+	<!-- tela de consulta -->
+	<div  class="consulta">
+		<span class="form_consulta">
+		<form>
+			<select name="tipo consulta" id="tipo_consulta" class="botao_seletor">
+				<option value= "lista"><span class="item_opcao">Lista</span></option>
+				<option value= "total"><span class="item_opcao">Total</span></option>
+			</select>
+			<select name="pontifice" id="pontifices" class="botao_seletor">
+				<option value= "Francesco"><span class="item_opcao">Francisco</span></option>
+				<option value= "Benedict XVI"><span class="item_opcao">Bento XVI</span></option>
+				<option value= "John Paul II"><span class="item_opcao">João Paulo II</span></option>
+				<option value= "none"><span class="item_opcao">Indefinido</span></option>
+			</select>
+			<input name="ano" id="ano" type="number" class="entrada_numerica" placeholder="Ano" />
+			<input type="button" onclick="get()"value="Pesquisar" class="botao_pesquisar">
+		</form>
+		</span>
+	</div>
+	
+	<div class=area-dados id="dados">
+		
+	</div>
+</body>
+
+</html>
