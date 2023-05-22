@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" http-equiv="Content-Type" content="charset=utf-8">
+	<title>Consulta de viagens</title>
+	<link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+	<link rel="stylesheet" type="text/css" href="estilo_pages.css">
+</head>
+
+<script type="application/javascript">
+	/*
+		Função que realiza a requisição a API e monta a Tabela com a resposta
+	*/
+	function get(event){
+		// url da API com a rota definida para a consulta
+		var url= "http://127.0.0.1:5000/viagens";
+
+		// obtém os dados que vãos ser usados na consulta a API
+		var pontifice = document.getElementById("pontifices").value;
+		var ano = document.getElementById("ano").value;
+		
+		if(pontifice == "none" && ano == ""){
+			console.log("Vai vir tudo");
+		}
+		else if( pontifice == "none"){
+			url=url+"?ano="+ano;
+		}
+		else if(ano == ""){
+			url=url+"?pontifice="+pontifice;
+		}
+		else{
+			url=url+"?pontifice="+pontifice+"&ano="+ano;
+		}
+		var ajax = new XMLHttpRequest();
+		
+		console.log(url);
+		ajax.open("GET",url,true);
+		ajax.onload = function(){
+			// se houve sucesso na requisição
+			if(ajax.status === 200){
+				// obtém json com a resposta
+				var jsonObj = JSON.parse(ajax.responseText);
+				// teste
+				console.log("recebi");
+				console.log(jsonObj);
+
+				// tamanho do json recebido
+				var tamanho = jsonObj.length;
+				//console.log(tamanho);
+				// obtém div onde a tabela ficara e a cria tabela
+				var area_dados = document.getElementById("dados");
+				var tabela = document.createElement("table");
+				//insere class para tabela
+				tabela.className="tabela_dados";
+				// limpa a div
+				area_dados.innerHTML="";
+				// cria nova linha
+				var linha = document.createElement("tr");
+				// cria campos de indentificação dos elementos da tabela (ano e titulo)
+				var colunaAno = document.createElement("td");
+				colunaAno.textContent="Ano";
+				var colunaTitulo = document.createElement("td");
+				colunaTitulo.textContent="Titulo";
+				var colunaPontifice = document.createElement("td");
+				colunaPontifice.textContent="Pontífice";
+				// insere na linha da tabela
+				linha.appendChild(colunaAno);
+				linha.appendChild(colunaTitulo);
+				linha.appendChild(colunaPontifice);
+				tabela.appendChild(linha);
+				// cria linhas da tabela com os dados obtidos
+				for(i = 0;i<tamanho;i++){
+					var linha1 = document.createElement("tr");
+					// obtém os valores do json
+					const ano = document.createTextNode(jsonObj[i]['ano']);
+					const titulo = document.createTextNode(jsonObj[i]['titulo']);
+					const pontifice = document.createTextNode(jsonObj[i]['pontifice']);
+					// aproveita as tags já prontas e cria novo elemento
+					const cellAno = document.createElement("td");
+					const cellTitulo = document.createElement("td");
+					const cellPontifice = document.createElement("td")
+					cellTitulo.appendChild(titulo);
+					cellAno.appendChild(ano);
+					cellPontifice.appendChild(pontifice);
+					linha1.appendChild(cellAno);
+					linha1.appendChild(cellTitulo);
+					linha1.appendChild(cellPontifice);
+					linha1.appendChild(cellPontifice);
+					tabela.appendChild(linha1);
+				}
+				area_dados.appendChild(tabela);
+			}
+		}
+		ajax.send();
+	}
+
+</script>
+
+<body>
+	<header id="header">
+
+		<div id="area-info">
+			<h1 class="titulo_page">VIAGENS PAPAIS</h1>
+			<p class="texto_info">API para consulta de viagens pontíficias, obtenha dados estatísticos das viagens </p>
+		</div>
+		
+		<div id="area-menu">
+			<a href="index.html"><span class="texto_navbar">HOME</span></a>
+			<a href="viagens_categorias.html"><span class="texto_navbar">Categorias</span></a>
+			<a href="viagens_dados.html"><span class="texto_navbar">Dados</span></a>
+			<a href="viagens_destinos.html"><span class="texto_navbar">Destinos</span></a>
+			<a href="viagens_pontifices.html"><span class="texto_navbar">Pontifices</span></a>
+		</div>
+	</header>
+
+	</div>
+	<!-- tela de consulta -->
+	<div  class="consulta">
+		<span class="form_consulta">
+		<form>
+			<select name="pontifice" id="pontifices" class="botao_seletor">
+				<option value= "Francesco"><span class="item_opcao">Francisco</span></option>
+				<option value= "Benedict XVI"><span class="item_opcao">Bento XVI</span></option>
+				<option value= "John Paul II"><span class="item_opcao">João Paulo II</span></option>
+				<option value= "none"><span class="item_opcao">Indefinido</span></option>
+			</select>
+			<input name="ano" id="ano" type="number" value="2012" class="entrada_numerica" placeholder="Ano" />
+			<input type="button" onclick="get()"value="Pesquisar" class="botao_pesquisar">
+		</form>
+		</span>
+	</div>
+	
+	<div class=area-dados id="dados">
+		
+	</div>
+</body>
+
+</html>

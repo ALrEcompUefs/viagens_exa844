@@ -1,0 +1,184 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+body{
+	background: #E8F7EE;
+}
+
+h1,h2,h3,h4,p,a{
+	text-align: center;
+	font-family: 'Inter';
+}
+
+/* Formatação da tabela */
+table {
+    border-spacing: 1;
+    border-collapse: collapse;
+    border-radius: 6px;
+	background: white;
+    overflow: hidden;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+	align-self: center;
+}
+td,th {
+	padding-left: 8px
+}
+
+tr {
+	height: 60px;
+	font-size: 16px;
+}
+
+tbody,tr {
+	height: 48px;
+	border-bottom: 1px solid #E3F1D5;
+	&:last-child {
+		border: 0;
+	}
+}
+
+td,th {
+	text-align: left;
+
+	&.l {
+		text-align: right
+	}
+
+	&.c {
+		text-align: center
+	}
+
+	&.r {
+		text-align: center
+	}
+}
+
+/*----------------------------------------------------------*/
+/*
+/** Formatação de link
+*/
+
+	a{
+		text-decoration: none;
+	}
+
+	a:link , a:visited {
+		color: white;
+		padding: 8px 12px;
+	}
+
+/** areas dos dados**/
+.area-dados{
+	margin: 10px 5px;
+	align-items: center;
+}
+/**------------------------------------------------------**/
+.consulta{
+	padding: 4px;
+	/*border: solid 2px red;*/
+	margin: 30px;
+}
+
+.tabela_dados{
+	margin: 10px;
+}
+
+.botao_seletor{
+	background-color: #FFFFFF;
+	border: solid 2px #EBEBEB;
+	padding: 4px 3px;
+	color: black;
+	font-size: 18px;
+	width: 120px;
+	height: 50px;
+	text-align: center;
+	margin-right: 10px;
+	margin-left: 10px;
+	font-weight: bold
+	
+}
+
+.entrada_numerica{
+	background-color: #FFFFFF;
+	border: none;
+	padding: 2px 2px;
+	color: black;
+	font-size: 18px;
+	width: 120px;
+	height: 50px;
+	text-align: center;
+	margin-right: 10px;
+	margin-left: 10px;
+	font-weight: bold;
+}
+
+.entrada_textual{
+	background-color: #FFFFFF;
+	border: none;
+	padding: 4px 3px;
+	color: black;
+	font-size: 18px;
+	width: 320px;
+	height: 50px;
+	text-align: center;
+	font-weight: bold;
+}
+.botao_pesquisar{
+	background-color: #FFFFFF;
+	border: none;
+	padding: 4px 3px;
+	color: black;
+	font-size: 18px;
+	width: 120px;
+	height: 50px;
+	text-align: center;
+	font-weight: bold;
+}
+
+
+/** Fontes e tamanhos de texto**/
+.texto_navbar{
+	font-size: 20px;
+}
+
+.texto_paragrafo{
+	font-size: 18px;
+}
+
+.texto_info{
+	font-size: 25px;
+}
+.titulo_page{
+	font-size: 40px;
+	margin-top: 20px;
+}
+
+.form_consulta{
+	align-items: center;
+}
+
+/*-------------------------------------------*/
+#header{
+	/*background-color: #bed9c8;*/
+	background-color: #246A73;
+	position: relative;
+	height: 200px;
+	width: 100%;
+	text-align: center;
+}
+
+#area-info{
+	border: solid 1px #246A73;
+	height: 70%;
+}
+
+#area-menu{
+	padding: 20px;
+	height: 30%;
+	align-items: center;
+}
