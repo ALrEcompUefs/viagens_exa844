@@ -8,6 +8,39 @@
 	<link rel="stylesheet" type="text/css" href="estilo_pages.css">
 </head>
 
+<script type="application/javascript">
+
+	/*
+		Função que realiza a requisição a API e monta a Tabela com a resposta
+	*/
+	function get(event){
+		var url= "https://api-projeto.onrender.com/pontifices";
+			// cria requisição
+		var ajax = new XMLHttpRequest();
+		
+		// printa url no console
+		console.log(url);
+
+		// faz a requisição
+		ajax.open("GET",url,true);
+		ajax.onload = function(){
+			// se houve sucesso na requisição
+			if(ajax.status === 200){
+				// obtém json com a resposta
+				var jsonObj = JSON.parse(ajax.responseText);
+				// teste
+				//console.log("recebi");
+				console.log(jsonObj);
+				create_table(jsonObj);
+			}
+		}
+		ajax.send();
+		}
+	
+	function create_table(jsonObj){
+
+	}
+</script>
 <body>
     <header id="header">
 
@@ -22,6 +55,10 @@
 			<a href="viagens_dados.html"><span class="texto_navbar">Dados</span></a>
 			<a href="viagens_destinos.html"><span class="texto_navbar">Destinos</span></a>
 			<a href="viagens_pontifices.html"><span class="texto_navbar">Pontifices</span></a>
+		</div>
+
+		<div id="menu-pontifices">
+
 		</div>
 	</header>
 </body>
