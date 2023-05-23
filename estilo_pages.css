@@ -26,7 +26,9 @@ table {
 	align-self: center;
 }
 td,th {
-	padding-left: 8px
+	padding-left: 8px;
+	padding-right: 4px;
+	text-align: left;
 }
 
 tr {
@@ -39,22 +41,6 @@ tbody,tr {
 	border-bottom: 1px solid #E3F1D5;
 	&:last-child {
 		border: 0;
-	}
-}
-
-td,th {
-	text-align: left;
-
-	&.l {
-		text-align: right
-	}
-
-	&.c {
-		text-align: center
-	}
-
-	&.r {
-		text-align: center
 	}
 }
 
@@ -83,11 +69,12 @@ td,th {
 	/*border: solid 2px red;*/
 	margin: 30px;
 }
-
+/*------------------------------------------------------*/
+/*Formata Tabela*/
 .tabela_dados{
 	margin: 10px;
 }
-
+/*---------------------------------------------*/
 .botao_seletor{
 	background-color: #FFFFFF;
 	border: solid 2px #EBEBEB;
@@ -181,4 +168,113 @@ td,th {
 	padding: 20px;
 	height: 30%;
 	align-items: center;
+}
+
+#dados{
+	display: flex;
+  	flex-wrap: wrap;
+}
+
+#dados td{
+	flex-basis: 100%;
+}
+@media all and (max-width: 660px) {
+	#header{
+		display: block;
+		height: 250px;
+	}
+	#area-info{
+		height: 60%;
+		padding: auto;
+	}
+	.texto_info{
+	font-size: 25px;
+	}
+	#area-menu{
+		display: flow-root;
+		/*float: left;*/
+		padding: 10px;
+		height: 30%;
+	}
+	.consulta{
+		padding: 4px;
+		/*border: solid 2px red;*/
+		margin: 20px;
+		height: 60%px;
+	}
+	form{
+		display: grid;
+		padding: 4px;
+	}
+	.botao_seletor{
+		width: 40%;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 15px;
+		margin-top: 15px;
+	}
+	.entrada_numerica{
+		width: 40%;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 15px;
+		margin-top: 15px;
+	}
+	.botao_pesquisar{
+		width: 40%;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 15px;
+		margin-top: 15px;
+	}
+	.entrada_textual{
+		width: 60%;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 15px;
+		margin-top: 15px;
+	}
+	#dados,td {
+		flex-basis: auto;
+	}
+}
+@media all and (max-width: 960px) and (min-width:661px){
+	.consulta{
+		padding: 4px;
+		/*border: solid 2px red;*/
+		margin: 20px;
+		height: 60%px;
+	}
+	form{
+		display: flex;
+		padding: 4px;
+	}
+	.botao_seletor{
+		width: 30%;
+		margin-left: 20px;
+		margin-right: 10px;
+		margin-bottom: 15px;
+		margin-top: 15px;
+	}
+	.entrada_numerica{
+		width: 30%;
+		margin-left: 20;
+		margin-right: 10px;
+		margin-bottom: 15px;
+		margin-top: 15px;
+	}
+	.botao_pesquisar{
+		width: 30%;
+		margin-left: 15px;
+		margin-right: 15px;
+		margin-bottom: 15px;
+		margin-top: 15px;
+	}
+	.entrada_textual{
+		width: 60%;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 15px;
+		margin-top: 15px;
+	}
 }
