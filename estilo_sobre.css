@@ -35,6 +35,11 @@ h3{
 	color: black;
 }
 
+ul{
+	display: inline;
+	padding: 4px 2px;
+}
+
 .titulo_page{
 	font-size: 40px;
 	margin-top: 20px;
@@ -47,14 +52,22 @@ h3{
 .texto_info{
 	font-size: 25px;
 }
+
+.titulo_secao{
+	font-size: 32px;
+}
+
 #area-menu{
 	padding: 20px;
 	height: 30%;
 	align-items: center;
 }
+
 .texto_paragrafo{
 	font-size: 18px;
+	margin-top: 10px;
 }
+
 #navbar{
 	text-align: center;
 }
@@ -96,7 +109,7 @@ h3{
 
 #info{
 	text-align: left;
-	display: flex;
+	display: inline;
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
@@ -104,8 +117,11 @@ h3{
 	padding: 10px;
 }
 
-.list{
 
+.list{
+	color: black;
+	font-size: 18px;
+	margin-top: 5px;
 }
 #etapas{
 	text-align: left;
@@ -133,5 +149,13 @@ h3{
 	
 }
 @media all and (max-width: 900px) and (min-width:661px){
-	
+	.info{
+		text-align: left;
+		display: inline;
+		width: 60%;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 20px;
+		padding: 10px;
+	}
 }

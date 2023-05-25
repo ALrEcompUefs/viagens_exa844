@@ -91,13 +91,20 @@
 				// teste
 				//console.log("recebi");
 				console.log(jsonObj);
-				create_table(jsonObj,tipo_tabela);
-
-                
+                if(jsonObj.length == 0){
+                    popUpMessage();
+                }
+				else{
+                    create_table(jsonObj,tipo_tabela);
+                }
 			}
 		}
 		ajax.send();
 	
+    }
+
+    function popUpMessage() {
+        alert("Nenhum dado Encontrado");
     }
 
     function create_table(jsonObj,tipo_tabela){
