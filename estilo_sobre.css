@@ -1,0 +1,137 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	/*background-color: #fcf4b6;*/
+	background-color: #E8F7EE;
+}
+
+
+h1,h2,h3,h4,p,a{
+	text-align: center;
+	font-family: 'Inter';
+}
+
+p{
+	text-align: center;
+}
+
+/*
+/** Formatação de link
+*/
+
+	a{
+		text-decoration: none;
+	}
+
+	a:link , a:visited {
+		color: white;
+		padding: 8px 12px;
+	}
+	
+h3{
+	color: black;
+}
+
+.titulo_page{
+	font-size: 40px;
+	margin-top: 20px;
+}
+
+.texto_navbar{
+	font-size: 20px;
+}
+
+.texto_info{
+	font-size: 25px;
+}
+#area-menu{
+	padding: 20px;
+	height: 30%;
+	align-items: center;
+}
+.texto_paragrafo{
+	font-size: 18px;
+}
+#navbar{
+	text-align: center;
+}
+#menu_itens{
+	/*border: 2px solid red;*/
+	margin-right: 50px;
+	margin-left: 50px;
+	display: flex;
+	/*background-color: #eb9961;*/
+	/*background-color: #FF9770;*/
+	/*background-color: #4C5B5C;*/
+	background: #7284A8;
+	width: 90%;
+	height: 300px;
+	align-items: center;
+}
+
+#header{
+	/*background-color: #bed9c8;*/
+	background-color: #246A73;
+	position: relative;
+	height: 200px;
+	width: 100%;
+	text-align: center;
+}
+
+#area-info{
+	border: solid 1px #246A73;
+	height: 70%;
+}
+#secreto{
+	font-size: 10px;
+
+}
+
+#area-menu{
+	padding: 10px;
+}
+
+#info{
+	text-align: left;
+	display: flex;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	padding: 10px;
+}
+
+.list{
+
+}
+#etapas{
+	text-align: left;
+	display: inline-block;
+
+}
+@media all and (max-width: 660px) {
+	#header{
+		display: block;
+		height: 250px;
+	}
+	#area-info{
+		height: 60%;
+		padding: auto;
+	}
+	.texto_info{
+	font-size: 25px;
+	}
+	#area-menu{
+		display: flow-root;
+		/*float: left;*/
+		padding: 10px;
+		height: 30%;
+	}
+	
+}
+@media all and (max-width: 900px) and (min-width:661px){
+	
+}
