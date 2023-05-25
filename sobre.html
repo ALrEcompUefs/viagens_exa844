@@ -8,39 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="estilo_pages.css">
 </head>
 
-<script type="application/javascript">
 
-	/*
-		Função que realiza a requisição a API e monta a Tabela com a resposta
-	*/
-	function get(event){
-		var url= "https://api-projeto.onrender.com/pontifices";
-			// cria requisição
-		var ajax = new XMLHttpRequest();
-		
-		// printa url no console
-		console.log(url);
-
-		// faz a requisição
-		ajax.open("GET",url,true);
-		ajax.onload = function(){
-			// se houve sucesso na requisição
-			if(ajax.status === 200){
-				// obtém json com a resposta
-				var jsonObj = JSON.parse(ajax.responseText);
-				// teste
-				//console.log("recebi");
-				console.log(jsonObj);
-				create_table(jsonObj);
-			}
-		}
-		ajax.send();
-		}
-	
-	function create_table(jsonObj){
-
-	}
-</script>
 <body>
     <header id="header">
 
@@ -57,8 +25,18 @@
 			<a href="sobre.html"><span class="texto_navbar">Sobre</span></a>
 		</div>
 
-		<div id="menu-pontifices">
-
+		<div id="info">
+			<h2>Sobre o projeto</h2>
+			<p>Este siste foi desenvolvolvido como parte do projeto da disciplina EXA844 programação para redes do curso de Engenaria da Computação da Universidade Estadual de Feira de Santana( UEFS )
+			</p>
+			<p>
+				O projeto consistiu em três etapas:
+			</p>
+				<ul>
+					<li>Crawler: realizar a busca e raspagem de um fonte na internet para montar uma base de dados estruturada</li>
+					<li>API REST: Construção e hospedagem de um API rest para consulta dos dados</li>
+					<li>Interface web: Construção de uma interface web para as consultas da API</li>
+				</ul>
 		</div>
 	</header>
 </body>
