@@ -45,56 +45,67 @@
 				console.log("recebi");
 				console.log(jsonObj);
 
+
 				// tamanho do json recebido
 				var tamanho = jsonObj.length;
 				//console.log(tamanho);
 				// obtém div onde a tabela ficara e a cria tabela
-				var area_dados = document.getElementById("dados");
-				var tabela = document.createElement("table");
-				//insere class para tabela
-				tabela.className="tabela_dados";
-				// limpa a div
-				area_dados.innerHTML="";
-				// cria nova linha
-				var linha = document.createElement("tr");
-				// cria campos de indentificação dos elementos da tabela (ano e titulo)
-				var colunaAno = document.createElement("td");
-				colunaAno.textContent="Ano";
-				var colunaTitulo = document.createElement("td");
-				colunaTitulo.textContent="Titulo";
-				var colunaPontifice = document.createElement("td");
-				colunaPontifice.textContent="Pontífice";
-				// insere na linha da tabela
-				linha.appendChild(colunaAno);
-				linha.appendChild(colunaTitulo);
-				linha.appendChild(colunaPontifice);
-				tabela.appendChild(linha);
-				// cria linhas da tabela com os dados obtidos
-				for(i = 0;i<tamanho;i++){
-					var linha1 = document.createElement("tr");
-					// obtém os valores do json
-					const ano = document.createTextNode(jsonObj[i]['ano']);
-					const titulo = document.createTextNode(jsonObj[i]['titulo']);
-					const pontifice = document.createTextNode(jsonObj[i]['pontifice']);
-					// aproveita as tags já prontas e cria novo elemento
-					const cellAno = document.createElement("td");
-					const cellTitulo = document.createElement("td");
-					const cellPontifice = document.createElement("td")
-					cellTitulo.appendChild(titulo);
-					cellAno.appendChild(ano);
-					cellPontifice.appendChild(pontifice);
-					linha1.appendChild(cellAno);
-					linha1.appendChild(cellTitulo);
-					linha1.appendChild(cellPontifice);
-					linha1.appendChild(cellPontifice);
-					tabela.appendChild(linha1);
+
+				if(tamanho == 0){
+					popUpMessage()
 				}
-				area_dados.appendChild(tabela);
+				else{
+					var area_dados = document.getElementById("dados");
+					var tabela = document.createElement("table");
+					//insere class para tabela
+					tabela.className="tabela_dados";
+					// limpa a div
+					area_dados.innerHTML="";
+					// cria nova linha
+					var linha = document.createElement("tr");
+					// cria campos de indentificação dos elementos da tabela (ano e titulo)
+					var colunaAno = document.createElement("td");
+					colunaAno.textContent="Ano";
+					var colunaTitulo = document.createElement("td");
+					colunaTitulo.textContent="Titulo";
+					var colunaPontifice = document.createElement("td");
+					colunaPontifice.textContent="Pontífice";
+					// insere na linha da tabela
+					linha.appendChild(colunaAno);
+					linha.appendChild(colunaTitulo);
+					linha.appendChild(colunaPontifice);
+					tabela.appendChild(linha);
+					// cria linhas da tabela com os dados obtidos
+					for(i = 0;i<tamanho;i++){
+						var linha1 = document.createElement("tr");
+						// obtém os valores do json
+						const ano = document.createTextNode(jsonObj[i]['ano']);
+						const titulo = document.createTextNode(jsonObj[i]['titulo']);
+						const pontifice = document.createTextNode(jsonObj[i]['pontifice']);
+						// aproveita as tags já prontas e cria novo elemento
+						const cellAno = document.createElement("td");
+						const cellTitulo = document.createElement("td");
+						const cellPontifice = document.createElement("td")
+						cellTitulo.appendChild(titulo);
+						cellAno.appendChild(ano);
+						cellPontifice.appendChild(pontifice);
+						linha1.appendChild(cellAno);
+						linha1.appendChild(cellTitulo);
+						linha1.appendChild(cellPontifice);
+						linha1.appendChild(cellPontifice);
+						tabela.appendChild(linha1);
+					}
+					area_dados.appendChild(tabela);
+				}
+				
 			}
 		}
 		ajax.send();
 	}
 
+	function popUpMessage() {
+  		alert("Nenhum dado Encontrado");
+	}
 </script>
 
 <body>
